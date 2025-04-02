@@ -1,0 +1,25 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Token {
+  id        String   @id @default(cuid())
+  symbol    String   @unique
+  name      String
+  price     Float
+  change24h Float
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+}
+
+model PriceHistory {
+  id        String   @id @default(cuid())
+  symbol    String
+  price     Float
+  timestamp DateTime @default(now())
+} 
